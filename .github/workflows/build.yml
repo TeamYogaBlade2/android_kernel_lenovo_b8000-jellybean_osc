@@ -1,0 +1,66 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  packages: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Env cache (restore)
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ./
+            /dev/shm/ccache
+          key: env-cache-${{ github.sha }}
+          restore-keys: env-cache-
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup env
+        run: |
+          sudo ln -sf /usr/bin/bash /usr/bin/sh
+          echo `pwd`/toolchain/Python-2.7.18 >> $GITHUB_PATH
+          mkdir -p /dev/shm/ccache
+          sudo apt install ccache
+          ccache -M 5G
+          ccache -z
+
+      - name: Build
+        run: bash ./build.sh
+        env:
+          MAKEJOBS: '-j6 HOSTCC="ccache gcc" HOSTCXX="ccache g++"'
+
+      #- name: Release
+        #run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes
+        #working-directory: kernel/build_result
+
+      - name: Ccache statistics
+        if: ${{ !cancelled() }}
+        run: ccache -sv
+
+      - name: Clean Repository
+        if: ${{ !cancelled() }}
+        run: |
+          git clean -ffdx
+          git reset --hard HEAD
+
+      - name: Env cache (save)
+        if: ${{ !cancelled() }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ./
+            /dev/shm/ccache
+          key: env-cache-${{ github.sha }}
