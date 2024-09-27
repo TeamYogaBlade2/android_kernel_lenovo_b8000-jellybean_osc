@@ -6,7 +6,7 @@ release="n"
 rebuild="n"
 clean="n"
 makeflags="-w"
-makedefs='V=0 HOSTCC="ccache gcc" HOSTCXX="ccache g++"'
+makedefs='V=0'
 makejobs=${MAKEJOBS}
 curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
@@ -18,6 +18,10 @@ usage() {
     echo "Usage: $0 {release|rebuild|clean|silent|verbose|single} [config-xxx]"
     echo "  config file will be generated if build with TARGET_PRODUCT"
     exit 1
+}
+
+make() {
+    /usr/bin/make HOSTCC="ccache gcc" HOSTCXX="ccache g++" $@
 }
 
 make_clean() {
