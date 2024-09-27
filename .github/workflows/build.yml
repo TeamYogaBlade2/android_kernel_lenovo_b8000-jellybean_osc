@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: bash ./build.sh
         env:
-          MAKEJOBS: '-j6 HOSTCC="ccache gcc" HOSTCXX="ccache g++"'
+          MAKEJOBS: '-j6'
 
       #- name: Release
         #run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes

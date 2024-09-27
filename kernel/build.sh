@@ -6,7 +6,7 @@ release="n"
 rebuild="n"
 clean="n"
 makeflags="-w"
-makedefs="V=0"
+makedefs='V=0 HOSTCC="ccache gcc" HOSTCXX="ccache g++"'
 makejobs=${MAKEJOBS}
 curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
