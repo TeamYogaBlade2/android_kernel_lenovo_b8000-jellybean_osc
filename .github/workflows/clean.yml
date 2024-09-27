@@ -1,3 +1,5 @@
+name: Clean
+
 on:
   workflow_dispatch:
 
@@ -16,6 +18,7 @@ jobs:
           echo `pwd`/toolchain/Python-2.7.18 >> $GITHUB_PATH
 
       - run: make distclean
+        working-directory: ./kernel
         env:
           TARGET_PRODUCT: lenovo89_tb_x10_jb2
 
