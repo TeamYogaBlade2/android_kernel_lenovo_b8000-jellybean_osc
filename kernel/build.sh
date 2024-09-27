@@ -101,7 +101,7 @@ if [ "${rebuild}" == "y" ]; then make_clean; fi
 echo "**** Configuring / $defcfg / ****"
 
 # Fix new configs being aborted in GitHub Actions
-make oldconfig
+yes "" | make oldconfig
 
 # select correct configuration file
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
