@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        run: |
+          sudo ln -sf /usr/bin/bash /usr/bin/sh
+          echo `pwd`/toolchain/Python-2.7.18 >> $GITHUB_PATH
+
+      - run: make distclean
+        env:
+          TARGET_PRODUCT: lenovo89_tb_x10_jb2
+
+      - run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -am 'Run `make distclean`'
+            git push
+          fi
