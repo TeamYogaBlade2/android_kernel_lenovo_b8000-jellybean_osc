@@ -11,7 +11,7 @@ makejobs=${MAKEJOBS}
 curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
-  mkdir -p $outdir
+  mkdir -p $outdir/out
 fi
 
 usage() {
