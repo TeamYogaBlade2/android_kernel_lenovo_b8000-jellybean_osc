@@ -11,7 +11,7 @@ makejobs=${MAKEJOBS}
 curdir=`pwd`
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
-  mkdir -p $outdir/out
+  mkdir -p $outdir
 fi
 
 usage() {
@@ -192,7 +192,7 @@ echo "**** Generate download images ****"
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
-  ${mkimg} ${kernel_zimg} KERNEL > out/kernel_${MTK_PROJECT}.bin
+  ${mkimg} ${kernel_zimg} KERNEL > $outdir/kernel_${MTK_PROJECT}.bin
 else
   ${mkimg} ${kernel_zimg} KERNEL > kernel_${MTK_PROJECT}.bin
 fi
