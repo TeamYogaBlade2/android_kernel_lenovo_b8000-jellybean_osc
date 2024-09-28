@@ -189,6 +189,8 @@ fi
 
 echo "**** Generate download images ****"
 
+outdir=$curdir/out
+
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
