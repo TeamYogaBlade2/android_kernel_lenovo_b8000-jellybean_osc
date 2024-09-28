@@ -17,10 +17,13 @@ jobs:
           sudo ln -sf /usr/bin/bash /usr/bin/sh
           echo `pwd`/toolchain/Python-2.7.18 >> $GITHUB_PATH
 
-      - run: make distclean
+      #- run: make distclean
+      - run: make mrproper
         working-directory: ./kernel
         env:
           TARGET_PRODUCT: lenovo89_tb_x10_jb2
+          CROSS_COMPILE: ../toolchain/arm-cortex_a7-linux-gnueabihf-linaro_4.9/bin/arm-cortex_a7-linux-gnueabihf-
+          MTK_ROOT_CUSTOM: ../mediatek/custom/
 
       - run: |
           if [ -n "$(git status --porcelain)" ]; then
