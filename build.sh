@@ -8,6 +8,8 @@ export CROSS_COMPILE="ccache $IT/toolchain/arm-cortex_a7-linux-gnueabihf-linaro_
 export KCFLAGS="-pipe -mtune=cortex-a7 -march=armv7-a -mfpu=neon-vfpv4"
 export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 
+export KBUILD_OUTPUT_SUPPORT="yes"
+
 cd kernel
 bash -e build.sh lenovo89_tb_x10_jb2
 
