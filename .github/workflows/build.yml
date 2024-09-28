@@ -45,7 +45,7 @@ jobs:
       - name: Release
         run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" build_result.tar.gz
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Ccache statistics
         if: ${{ !cancelled() }}
