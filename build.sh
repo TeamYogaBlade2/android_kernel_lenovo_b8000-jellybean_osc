@@ -32,3 +32,7 @@ echo "**** You can find zImage in root folder: /build_result/kernel/ ****"
 echo "**** You can find all modules in root folder: /build_result/modules/ ****"
 #echo "**** Rename the kernelFile to zImage and repack with stock RamDisk ****"
 echo "**** Now grab the zImage and repack with stock RamDisk ****"
+
+echo "**** Packing build result ****"
+tar zcvf build_result.tar.gz ./build_result
+echo "**** build_result.tar.gz has been created ****"

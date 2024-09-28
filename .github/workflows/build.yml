@@ -42,9 +42,8 @@ jobs:
         env:
           MAKEJOBS: '-j6'
 
-      #- name: Release
-        #run: gh release create "build-$(date +%Y%m%d%H%M%S)" -t "build-$(date +%Y%m%d%H%M%S)" --generate-notes
-        #working-directory: kernel/build_result
+      - name: Release
+        run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" build_result.tar.gz
 
       - name: Ccache statistics
         if: ${{ !cancelled() }}
