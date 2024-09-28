@@ -9,10 +9,10 @@ makeflags="-w"
 makedefs='V=0'
 makejobs=${MAKEJOBS}
 curdir=`pwd`
-if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
+#if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
   mkdir -p $outdir
-fi
+#fi
 
 usage() {
     echo "Usage: $0 {release|rebuild|clean|silent|verbose|single} [config-xxx]"
