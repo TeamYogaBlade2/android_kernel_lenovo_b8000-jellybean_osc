@@ -12,6 +12,7 @@ export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 
 cd kernel
 bash -e build.sh lenovo89_tb_x10_jb2
+cd ..
 
 echo "**** Successfully built kernel ****"
 
