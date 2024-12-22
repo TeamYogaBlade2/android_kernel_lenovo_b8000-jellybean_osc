@@ -8,6 +8,9 @@ permissions:
   packages: write
   contents: write
 
+env:
+  CCACHE_DIR: "/dev/shm/ccache"
+
 jobs:
   build:
     runs-on: ubuntu-latest
