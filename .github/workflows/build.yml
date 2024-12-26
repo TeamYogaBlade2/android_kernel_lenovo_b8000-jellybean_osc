@@ -3,6 +3,13 @@ name: Build
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      tmate:
+        type: boolean
+        description: 'SSH debug'
+        required: false
+        default: false
 
 permissions:
   packages: write
@@ -16,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: mxschmitt/action-tmate@v3
+        if: ${{ inputs.tmate }}
+        with:
+          detached: true
+
       - name: Env cache (restore)
         id: cache
         uses: actions/cache/restore@v4
