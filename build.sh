@@ -56,7 +56,7 @@ echo "**** Kernel build completed ****"
 
 echo "**** Copying kernel to /build_result/kernel/ ****"
 mkdir -p ./build_result/kernel/
-cp ./kernel/arch/arm/boot/zImage ./build_result/kernel/boot.img-kernel
+cp ./kernel/out/arch/arm/boot/zImage ./build_result/kernel/boot.img-kernel
 
 echo "**** Copying all built modules (.ko) to /build_result/modules/ ****"
 mkdir -p ./build_result/modules/
