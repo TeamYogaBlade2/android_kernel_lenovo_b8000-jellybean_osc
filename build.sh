@@ -12,6 +12,8 @@ export CROSS_COMPILE="$IT/toolchain/arm-cortex_a7-linux-gnueabihf-linaro_4.9/bin
 export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 export TARGET_PRODUCT=lenovo89_tb_x10_jb2
 
+. ./mediatek/build/shell.sh . kernel
+
 #export KBUILD_OUTPUT_SUPPORT="yes"
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
@@ -19,10 +21,8 @@ if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   mkdir -p $outdir
 fi
 
-. ./mediatek/build/shell.sh . kernel
-
 cd kernel
-make $MAKEJOBS
+#make $MAKEJOBS
 cd ..
 
 echo "**** Successfully built kernel ****"
@@ -32,23 +32,21 @@ if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
   kernel_img="${outdir}/arch/arm/boot/Image"
   kernel_zimg="${outdir}/arch/arm/boot/zImage"
 else
-kernel_img="${curdir}/arch/arm/boot/Image"
-kernel_zimg="${curdir}/arch/arm/boot/zImage"
+  kernel_img="${curdir}/arch/arm/boot/Image"
+  kernel_zimg="${curdir}/arch/arm/boot/zImage"
 fi
 
 echo "**** Generate download images ****"
-
-outdir=$curdir/out
 
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
   ${mkimg} ${kernel_zimg} KERNEL > $outdir/kernel_${MTK_PROJECT}.bin
+  copy_to_legacy_download_flash_folder $outdir/kernel_${MTK_PROJECT}.bin rootfs_${MTK_PROJECT}.bin
 else
-  ${mkimg} ${kernel_zimg} KERNEL > kernel_${MTK_PROJECT}.bin
+  ${mkimg} ${kernel_zimg} KERNEL > $curdir/kernel_${MTK_PROJECT}.bin
+  copy_to_legacy_download_flash_folder $curdir/kernel_${MTK_PROJECT}.bin rootfs_${MTK_PROJECT}.bin
 fi
-
-copy_to_legacy_download_flash_folder   kernel_${MTK_PROJECT}.bin rootfs_${MTK_PROJECT}.bin
 
 echo "**** Kernel build completed ****"
 
