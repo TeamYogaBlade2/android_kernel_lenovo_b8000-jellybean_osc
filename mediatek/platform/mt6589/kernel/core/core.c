@@ -10,6 +10,8 @@
 #include <asm/page.h>
 #include <mach/mt_mci.h>
 #include <linux/bug.h>
+#include <asm/memory.h>
+#include <mach/memory.h>
 
 extern void arm_machine_restart(char mode, const char *cmd);
 extern struct sys_timer mt6589_timer;
