@@ -11,7 +11,7 @@ export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 #export KBUILD_OUTPUT_SUPPORT="yes"
 
 cd kernel
-bash -e build.sh lenovo89_tb_x10_jb2
+TARGET_PRODUCT=lenovo89_tb_x10_jb2 MTK_ROOT_CUSTOM=../mediatek/custom/ make
 cd ..
 
 echo "**** Successfully built kernel ****"
@@ -22,12 +22,16 @@ cp ./kernel/arch/arm/boot/zImage ./build_result/kernel/boot.img-kernel
 
 echo "**** Copying all built modules (.ko) to /build_result/modules/ ****"
 mkdir -p ./build_result/modules/
-for file in $(find ./kernel -name *.ko); do
+for file in $(find -name "*.ko"); do
  cp $file ./build_result/modules/
 done
 
 echo "**** Patching all built modules (.ko) in /build_result/modules/ ****"
 find ./build_result/modules/ -type f -name '*.ko' | xargs -n 1 ${CROSS_COMPILE}strip --strip-unneeded
+
+echo "**** Copying MediaTek files to /build_result/mtk ****"
+cp -r ./out ./build_result/mtk
+
 echo "**** Finnish ****"
 
 #echo "**** You can find kernelFile in root folder: /build_result/kernel/ ****"

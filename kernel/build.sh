@@ -8,7 +8,7 @@ clean="n"
 makeflags="-w"
 makedefs='V=0'
 makejobs=${MAKEJOBS}
-curdir=`pwd`
+curdir=$(cd $(dirname $0) && pwd)
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
 fi
