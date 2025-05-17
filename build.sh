@@ -17,7 +17,8 @@ export TARGET_PRODUCT=lenovo89_tb_x10_jb2
 #export KBUILD_OUTPUT_SUPPORT="yes"
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
-  outdir=$curdir/out
+  #outdir=$curdir/out
+  outdir=$curdir/out # hack
   mkdir -p $outdir
 fi
 
