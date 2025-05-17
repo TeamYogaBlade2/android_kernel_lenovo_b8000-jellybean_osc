@@ -22,7 +22,7 @@ if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
 fi
 
 cd kernel
-#make $MAKEJOBS
+make $MAKEJOBS
 cd ..
 
 echo "**** Successfully built kernel ****"
