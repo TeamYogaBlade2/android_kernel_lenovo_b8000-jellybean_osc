@@ -17,13 +17,16 @@ export TARGET_PRODUCT=lenovo89_tb_x10_jb2
 #export KBUILD_OUTPUT_SUPPORT="yes"
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
-  #outdir=$curdir/out
-  outdir=$curdir/out # hack
+  outdir=$curdir/out
   mkdir -p $outdir
 fi
 
 cd kernel
-make $MAKEJOBS
+if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
+  make $MAKEJOBS O=out
+else
+  make $MAKEJOBS
+fi
 cd ..
 
 echo "**** Successfully built kernel ****"
