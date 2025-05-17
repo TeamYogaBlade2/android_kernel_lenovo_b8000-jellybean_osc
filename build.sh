@@ -4,8 +4,7 @@ set -e
 cd `dirname $BASH_SOURCE`
 
 IT=$(cd $(dirname $BASH_SOURCE); pwd)
-export CROSS_COMPILE="ccache $IT/toolchain/arm-cortex_a7-linux-gnueabihf-linaro_4.9/bin/arm-cortex_a7-linux-gnueabihf-"
-export KCFLAGS="-pipe -mtune=cortex-a7 -march=armv7-a -mfpu=neon-vfpv4"
+export CROSS_COMPILE="$IT/toolchain/arm-cortex_a7-linux-gnueabihf-linaro_4.9/bin/arm-cortex_a7-linux-gnueabihf-"
 export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 
 #export KBUILD_OUTPUT_SUPPORT="yes"

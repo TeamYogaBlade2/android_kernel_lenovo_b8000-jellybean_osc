@@ -11,17 +11,13 @@ makejobs=${MAKEJOBS}
 curdir=$(cd $(dirname $0) && pwd)
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
+  mkdir -p $outdir
 fi
-mkdir -p $curdir/out
 
 usage() {
     echo "Usage: $0 {release|rebuild|clean|silent|verbose|single} [config-xxx]"
     echo "  config file will be generated if build with TARGET_PRODUCT"
     exit 1
-}
-
-make() {
-    /usr/bin/make HOSTCC="ccache gcc" HOSTCXX="ccache g++" $@
 }
 
 make_clean() {
@@ -99,9 +95,6 @@ fi
 if [ "${rebuild}" == "y" ]; then make_clean; fi
 
 echo "**** Configuring / $defcfg / ****"
-
-# Fix new configs being aborted in GitHub Actions
-yes "" | make oldconfig
 
 # select correct configuration file
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
@@ -188,8 +181,6 @@ kernel_zimg="${curdir}/arch/arm/boot/zImage"
 fi
 
 echo "**** Generate download images ****"
-
-outdir=$curdir/out
 
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 

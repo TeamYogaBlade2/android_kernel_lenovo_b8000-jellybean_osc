@@ -51,6 +51,7 @@ jobs:
         run: bash ./build.sh
         env:
           MAKEJOBS: '-j6'
+          USE_CCACHE: "1"
 
       - name: Release
         run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" build_result.tar.gz
