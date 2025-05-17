@@ -36,19 +36,19 @@ modules.builtin
 #
 # Top-level generic files
 #
-/tags
-/TAGS
-/linux
-/vmlinux
-/vmlinuz
-/System.map
-/Module.markers
-/Module.symvers
+/kernel/tags
+/kernel/TAGS
+/kernel/linux
+/kernel/vmlinux
+/kernel/vmlinuz
+/kernel/System.map
+/kernel/Module.markers
+/kernel/Module.symvers
 
 #
 # Debian directory (make deb-pkg)
 #
-/debian/
+/kernel/debian/
 
 #
 # git files that we don't want to ignore even it they are dot-files
@@ -86,4 +86,4 @@ GTAGS
 \#*#
 
 # MediaTek
-/mediatek/config/out/
+/mediatek/config/out
