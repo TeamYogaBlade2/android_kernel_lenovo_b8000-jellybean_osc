@@ -1,6 +1,8 @@
 #/bin/bash
 set -e
 
+rm -rf ./build_result
+
 cd `dirname $BASH_SOURCE`
 
 IT=$(cd $(dirname $BASH_SOURCE); pwd)
@@ -10,7 +12,7 @@ export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 #export KBUILD_OUTPUT_SUPPORT="yes"
 
 cd kernel
-TARGET_PRODUCT=lenovo89_tb_x10_jb2 MTK_ROOT_CUSTOM=../mediatek/custom/ make
+TARGET_PRODUCT=lenovo89_tb_x10_jb2 MTK_ROOT_CUSTOM=../mediatek/custom/ make $MAKEJOBS
 cd ..
 
 echo "**** Successfully built kernel ****"
@@ -21,7 +23,7 @@ cp ./kernel/arch/arm/boot/zImage ./build_result/kernel/boot.img-kernel
 
 echo "**** Copying all built modules (.ko) to /build_result/modules/ ****"
 mkdir -p ./build_result/modules/
-for file in $(find -name "*.ko"); do
+for file in $(find kernel mediatek -name "*.ko"); do
  cp $file ./build_result/modules/
 done
 
