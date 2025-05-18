@@ -632,8 +632,8 @@ struct fb_deferred_io {
 struct fb_ops {
 	/* open/release and usage marking */
 	struct module *owner;
-	int (*fb_open)(struct file *file, struct fb_info *info, int user);
-	int (*fb_release)(struct file *file, struct fb_info *info, int user);
+	int (*fb_open)(struct fb_info *info, int user);
+	int (*fb_release)(struct fb_info *info, int user);
 
 	/* For framebuffers with strange non linear layouts or that do not
 	 * work with normal memory mapped access
