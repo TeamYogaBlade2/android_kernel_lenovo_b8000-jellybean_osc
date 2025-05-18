@@ -697,7 +697,7 @@ static int con2fb_acquire_newinfo(struct vc_data *vc, struct fb_info *info,
 		err = -ENODEV;
 
 	if (!err && info->fbops->fb_open &&
-	    info->fbops->fb_open(info, 0))
+	    info->fbops->fb_open(NULL, info, 0))
 		err = -ENODEV;
 
 	if (!err) {
@@ -729,7 +729,7 @@ static int con2fb_release_oldinfo(struct vc_data *vc, struct fb_info *oldinfo,
 	int err = 0, ret;
 
 	if (oldinfo->fbops->fb_release &&
-	    oldinfo->fbops->fb_release(oldinfo, 0)) {
+	    oldinfo->fbops->fb_release(NULL, oldinfo, 0)) {
 		con2fb_map[unit] = oldidx;
 		if (!found && newinfo->fbops->fb_release)
 			newinfo->fbops->fb_release(newinfo, 0);
@@ -939,7 +939,7 @@ static const char *fbcon_startup(void)
 	owner = info->fbops->owner;
 	if (!try_module_get(owner))
 		return NULL;
-	if (info->fbops->fb_open && info->fbops->fb_open(info, 0)) {
+	if (info->fbops->fb_open && info->fbops->fb_open(NULL, info, 0)) {
 		module_put(owner);
 		return NULL;
 	}
@@ -3525,7 +3525,7 @@ static void fbcon_exit(void)
 
 		if (mapped) {
 			if (info->fbops->fb_release)
-				info->fbops->fb_release(info, 0);
+				info->fbops->fb_release(NULL, info, 0);
 			module_put(info->fbops->owner);
 
 			if (info->fbcon_par) {
