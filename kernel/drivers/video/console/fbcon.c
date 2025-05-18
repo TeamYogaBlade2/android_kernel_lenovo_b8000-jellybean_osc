@@ -732,7 +732,7 @@ static int con2fb_release_oldinfo(struct vc_data *vc, struct fb_info *oldinfo,
 	    oldinfo->fbops->fb_release(NULL, oldinfo, 0)) {
 		con2fb_map[unit] = oldidx;
 		if (!found && newinfo->fbops->fb_release)
-			newinfo->fbops->fb_release(newinfo, 0);
+			newinfo->fbops->fb_release(NULL, newinfo, 0);
 		if (!found)
 			module_put(newinfo->fbops->owner);
 		err = -ENODEV;
