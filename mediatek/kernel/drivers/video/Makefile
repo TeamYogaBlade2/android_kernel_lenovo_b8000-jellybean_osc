@@ -12,9 +12,12 @@ obj-$(CONFIG_MTK_FB) += disp_drv_dbi.o              \
          mtkfb.o                                    \
 		 mtkfb_vsync.o								\
          debug.o                                    \
-         font_8x16.o                                \
          tv_out.o                                   \
          mtkfb_proc.o
+
+## duplicate: kernel/drivers/video/console/font_8x16.c
+#         font_8x16.o                                \
+
 
 ccflags-y += -I$(MTK_PATH_PLATFORM)/drivers/video/  \
              -I$(MTK_PATH_SOURCE)/drivers/video/    \
