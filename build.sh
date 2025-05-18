@@ -8,7 +8,7 @@ cd `dirname $BASH_SOURCE`
 IT=$(cd $(dirname $BASH_SOURCE); pwd)
 curdir=$(cd $(dirname $0) && pwd)/kernel
 
-export CROSS_COMPILE="$IT/toolchain/arm-cortex_a7-linux-gnueabihf-linaro_4.9/bin/arm-cortex_a7-linux-gnueabihf-"
+export CROSS_COMPILE="$IT/toolchain/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-"
 export MTK_ROOT_CUSTOM="$IT/mediatek/custom/"
 export TARGET_PRODUCT=lenovo89_tb_x10_jb2
 
